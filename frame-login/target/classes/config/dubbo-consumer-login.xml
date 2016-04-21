@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo        
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+	<!-- dubbo 提供服务 -->
+	<!--  1: 服务消费者-->
+	<dubbo:application name="frame-consumer-login"/>
+	
+	<!-- 2：向注册中心  以广播的形势注册 -->
+<!-- 	<dubbo:registry protocol="multicast" address="224.5.6.7:1234"/> -->
+<!-- <dubbo:registry protocol="zookeeper" address="192.168.200.128:2181,192.168.200.133:2181,192.168.200.134:2181"/> -->
+	<dubbo:registry address="N/A"/>
+
+
+	<!-- 3:调用服务提供方暴露的接口 -->
+	<!-- <dubbo:reference id="buyerServiceImpl"  interface="cn.itcast.babasport.service.BuyerService"
+	url="dubbo://127.0.0.1:20880"
+		 />
+	<dubbo:reference id="productServiceImpl"  interface="cn.itcast.babasport.service.ProductService"
+	url="dubbo://127.0.0.1:20880"
+		 />
+	<dubbo:reference id="brandServiceImpl"  interface="cn.itcast.babasport.service.BrandService"
+	url="dubbo://127.0.0.1:20880"
+		 />
+	<dubbo:reference id="uploadService"  interface="cn.itcast.babasport.service.UploadService"
+	url="dubbo://127.0.0.1:20880"
+		 />
+	<dubbo:reference id="typeServiceImpl"  interface="cn.itcast.babasport.service.TypeService"
+	url="dubbo://127.0.0.1:20880"
+		 />
+	<dubbo:reference id="skuServiceImpl"  interface="cn.itcast.babasport.service.SkuService"
+	url="dubbo://127.0.0.1:20880"
+		 />
+	<dubbo:reference id="colorServiceImpl"  interface="cn.itcast.babasport.service.ColorService"
+	url="dubbo://127.0.0.1:20880"
+		 />
+	<dubbo:reference id="sessionProviderImpl"  interface="cn.itcast.babasport.session.service.SessionProvider"
+	url="dubbo://127.0.0.1:20880"
+		 /> -->
+	<!-- 全局设置  连接超时时间 单位是毫秒   当前是10分钟   并设置启动时dubbo不检索是否有相对应的服务提供方   仅开发阶段使用  -->
+	<dubbo:consumer timeout="600000" check="false"/>
+</beans>

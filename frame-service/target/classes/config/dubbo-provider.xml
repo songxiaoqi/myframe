@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo        
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+		<!-- 服务名 -->
+		<dubbo:application name="frame-service"/>
+		<!-- 注册     不适用注册中心-->
+		<!-- <dubbo:registry address="N/A"/> -->
+		<!-- 	<dubbo:registry protocol="multicast" address="224.5.6.7:1234"/> -->
+ 		<dubbo:registry protocol="zookeeper" address="192.168.237.129:2181" check="false" subscribe="false"/>
+		<!-- 服務端口 -->
+		<!-- <dubbo:protocol name="dubbo" port="20880"/> -->
+		<!-- 提供的接口 -->
+		<!-- <dubbo:service interface="cn.itcast.babasport.service.ProductService" ref="productServiceImpl"/>
+		<dubbo:service interface="cn.itcast.babasport.service.BrandService" ref="brandServiceImpl"/>
+		<dubbo:service interface="cn.itcast.babasport.service.UploadService" ref="uploadService"/>
+		<dubbo:service interface="cn.itcast.babasport.service.TypeService" ref="typeServiceImpl"/>
+		<dubbo:service interface="cn.itcast.babasport.service.SkuService" ref="skuServiceImpl"/>
+		<dubbo:service interface="cn.itcast.babasport.service.ColorService" ref="colorServiceImpl"/>
+		<dubbo:service interface="cn.itcast.babasport.service.staticpage.StaticPageServcie" ref="staticPageServiceImpl"/>
+		<dubbo:service interface="cn.itcast.babasport.service.BuyerService" ref="buyerServiceImpl"/>
+		<dubbo:service interface="cn.itcast.babasport.session.service.SessionProvider" ref="sessionProviderImpl"/> -->
+</beans>

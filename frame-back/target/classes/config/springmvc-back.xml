@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo        
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 配置处理器映射器   适配器 -->
+	<mvc:annotation-driven conversion-service="converterServer"/>
+	
+	<!-- 配置转换器    转换器要交给适配器管理  转换后进行参数绑定-->
+	<bean id="converterServer" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<!-- 去空格转换器 -->
+				<bean class="cn.itcast.babasport.converter.TrimConverter"/>
+				<!-- <bean class="cn.itcast.babasport.converter.TrimConverter"/>
+				<bean class="cn.itcast.babasport.converter.TrimConverter"/>
+				<bean class="cn.itcast.babasport.converter.TrimConverter"/> -->
+			</list>
+		</property>
+	</bean>	
+	<!-- 配置视图解析器 -->
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/back_page/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<context:component-scan base-package="cn.itcast"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- Spring支持上传图片   -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 图片大小不能超过1M  默认单位 是B-->
+		<property name="maxUploadSize" value="1048576"/>
+	</bean>
+	
+	<!-- 引入服务器消费方配置文件 -->
+	<import resource="classpath:config/dubbo-consumer-back.xml"/>
+
+</beans>
